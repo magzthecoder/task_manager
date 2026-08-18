@@ -1,0 +1,18 @@
+{% extends 'main.html' %}
+
+{% block title %}Task List{% endblock %}
+
+{% block content %}
+<h1>{{ task.title }}</h1>
+<div class="info">
+    <p>Created on: {{ task.created_at|date:"M d, Y" }}</p>
+    <p>Category: {{task.category }}</p>
+    <p>Completed: {{task.completed}} </p>
+
+<div class="btns">
+    <a href="{% url 'edit_task' pk=task.id %}">Edit</a>
+    <a href="{% url 'delete_task' pk=task.id %}">Delete</a>
+    <a href="{% url 'task_list' %}">Back</a>
+</div>
+
+{% endblock %}
