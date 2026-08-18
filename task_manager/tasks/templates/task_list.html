@@ -1,0 +1,30 @@
+{% extends 'main.html' %}
+
+{% block title %}Task List{% endblock %}
+
+{% block content %}
+<h1>Task Manager</h1>
+<div class="log-container"> 
+     <nav>
+        {% if user.is_authenticated %} 
+            <p class="wel-text">Welcome, {{ user.username }}!</p> 
+            <a href="{% url 'logout_page' %}">Logout</a> 
+            <a href="{% url 'add_task' %}">Add</a>
+        {% else %} 
+            <a href="{% url 'login_page' %}">Login</a> 
+            <a href="{% url 'register_page' %}">Register</a> 
+        {% endif %} 
+     </nav>
+</div>
+
+<div class="task">
+    <ul class="text">
+        {% for x in tasks %} 
+            <li><a href="{% url 'task_detail' x.pk %}">{{ x.title }}</a></li> 
+            {% empty %}
+            <a href="{% url 'add_task' %}">Add Task</a>
+        {% endfor %} 
+    </ul>
+</div>
+
+{% endblock %}

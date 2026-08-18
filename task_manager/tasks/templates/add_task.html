@@ -1,0 +1,21 @@
+{% extends 'main.html' %}
+
+{% block title %}Task List{% endblock %}
+
+{% block content %}
+<div>
+    <form method="POST">
+        {% csrf_token %}
+        <p>Category: {{ form.category }} <a href="{% url 'add_category' %}">Add Category</a> <br> </p>
+        <p>Title: {{ form.title }}<br></p>
+        <p>Description: {{ form.description }}<br></p>
+
+        <button class="btn-submit" >Submit</button>
+    </form>
+</div>
+
+<div class="btns">
+    <a href="{% url 'task_list' %}">Back</a>
+</div>
+
+{% endblock %}

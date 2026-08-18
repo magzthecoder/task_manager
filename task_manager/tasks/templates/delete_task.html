@@ -1,0 +1,18 @@
+{% extends 'main.html' %}
+
+{% block title %} Delete {% endblock %}
+
+{% block content %}
+<div class="delete-container">
+    <h1>Delete</h1>
+    <p>Are you sure you want to delete {{ task.title }}</p>
+    <form method="POST">
+        {% csrf_token %}
+        <button class="btn-submit" >Confirm</button>
+
+        <div class="btn">
+            <a href="{% url 'task_detail' pk=task.pk %}">Back</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

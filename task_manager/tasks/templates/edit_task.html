@@ -1,0 +1,18 @@
+{% extends 'main.html' %}
+
+{% block title %}Task List{% endblock %}
+
+{% block content %}
+<div>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn-submit" >Submit</button>
+    </form>
+</div>
+
+<div class="btns">
+    <a href="{% url 'task_list' %}">Back</a>
+</div>
+
+{% endblock %}

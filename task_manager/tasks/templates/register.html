@@ -1,0 +1,43 @@
+{% extends 'main.html' %}
+
+    {% block title %}Task Manager{% endblock %}
+
+{% block content %}
+    <div>
+        <form method="POST">
+            {% csrf_token %}
+
+            <h3>Get Started with your Task Manager</h3>
+            <hr>
+
+            {% if messages %}
+            <div class="alert alert-primary" role="alert">
+                {% for message in messages %}
+                    <p class="mb-0">{{ message }}</p
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <div class="form-group">
+                <input type="email" class="form-control" id="registerEmail" name="email" required>
+                <label for="registerEmail">Email</label>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="username" id="registerUsername" required>
+                <label for="registerUsername">Username</label>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" name="password" id="registerPassword" required>
+                <label for="registerPassword">Password</label>
+            </div>
+                <button type="submit" class="button">Submit</button>
+
+                <p>
+                    <a href="{% url 'login_page' %}" class="register-button">Already have an account?</a>
+                </p>
+
+
+        </form>
+    </div>
+    
+{% endblock %}
