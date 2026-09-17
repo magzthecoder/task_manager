@@ -1,0 +1,57 @@
+h1{
+    margin-bottom: 32px;
+    font-size: 35px;
+    font-weight: 600;
+    color: #1E293B;
+}
+.info{
+    background-color:#FFFFFF ;
+    color: #1E293B;
+    border: 1px solid #E2E8F0;
+    padding: 24px 32px;
+    border-radius: 20px;
+    margin-top: 24px;
+}
+.info p{
+    color: #64748B;
+}
+.btns{
+    padding: 10px;
+    border-radius: 24px;
+    font-size: 16px;
+    display: flex;
+    gap: 12px;
+}
+.edit-btn {
+    color: #FFFFFF;
+    text-decoration: none;
+    background-color:#2563EB ;
+    border-radius: 20px;
+    padding: 8px 16px;
+}
+.edit-btn:hover{
+    background-color:#1D4ED8 ;
+    color: #FFFFFF;
+}
+.delete-btn {
+    color: #FFFFFF;
+    background-color: #DC2626;
+    text-decoration: none;
+    border-radius: 20px;
+    padding: 8px 16px;
+}
+.delete-btn:hover{
+    background-color: #DC143C;
+    color: #FFFFFF;
+}
+.back-btn, .submit-btn {
+    color: #FFFFFF;
+    background-color: #64748B;
+    text-decoration: none;
+    border-radius: 20px;
+    padding: 8px 16px;
+}
+.back-btn:hover{
+    background-color: #475569;
+    color: #FFFFFF;
+}

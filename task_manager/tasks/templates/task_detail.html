@@ -1,18 +1,26 @@
 {% extends 'main.html' %}
+{% load static %}
 
-{% block title %}Task List{% endblock %}
+{% block title %}Task Details{% endblock %}
+
+
+    {% block extra_head %}<link rel="stylesheet" href="{% static 'css/detail.css' %}">{% endblock %}
+
 
 {% block content %}
 <h1>{{ task.title }}</h1>
 <div class="info">
     <p>Created on: {{ task.created_at|date:"M d, Y" }}</p>
-    <p>Category: {{task.category }}</p>
-    <p>Completed: {{task.completed}} </p>
+    <p>Category: {{ task.category }}</p>
+    <p>Description: {{ task.description }}</p>
+    <p>Completed: {{ task.completed }} </p>
 
-<div class="btns">
-    <a href="{% url 'edit_task' pk=task.id %}">Edit</a>
-    <a href="{% url 'delete_task' pk=task.id %}">Delete</a>
-    <a href="{% url 'task_list' %}">Back</a>
+    <div class="btns">
+        <a href="{% url 'edit_task' pk=task.id %}" class="edit-btn">Edit</a>
+        <a href="{% url 'delete_task' pk=task.id %}" class="delete-btn">Delete</a>
+        <a href="{% url 'task_list' %}" class="back-btn">Back</a>
+    </div>
+
 </div>
 
 {% endblock %}
