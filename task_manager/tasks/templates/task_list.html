@@ -1,15 +1,21 @@
 {% extends 'main.html' %}
+{% load static %}
 
 {% block title %}Task List{% endblock %}
 
 {% block content %}
-<h1>Task Manager</h1>
+
+<h1>My Tasks</h1>
+{% block extra_head %}<link rel="stylesheet" href="{% static 'css/list.css' %}">{% endblock %}
+
 <div class="log-container"> 
      <nav>
         {% if user.is_authenticated %} 
-            <p class="wel-text">Welcome, {{ user.username }}!</p> 
-            <a href="{% url 'logout_page' %}">Logout</a> 
-            <a href="{% url 'add_task' %}">Add</a>
+            <p class="wel-text">Welcome, {{ user.username }}!</p>
+            <div class="actions"> 
+                <a href="{% url 'logout_page' %}" class="logout-link">Logout</a> 
+                <a href="{% url 'add_task' %}" class="add-link">Add</a>
+            </div> 
         {% else %} 
             <a href="{% url 'login_page' %}">Login</a> 
             <a href="{% url 'register_page' %}">Register</a> 
@@ -20,9 +26,22 @@
 <div class="task">
     <ul class="text">
         {% for x in tasks %} 
-            <li><a href="{% url 'task_detail' x.pk %}">{{ x.title }}</a></li> 
+            <li class="task-card">
+                <h2>{{ x.title }}</h2>
+                <p class="category">{{ x.category }}</p> 
+                <p class="status {% if x.completed %}completed{% else %}not-completed{% endif %}">
+                    {% if x.completed %}
+                        Completed
+                    {% else %}
+                        Not completed
+                    {% endif %}
+                </p> 
+                <p class="view-container">
+                    <a href="{% url 'task_detail' x.pk %}" class="view-link">View</a>
+                </p>
+            </li>
             {% empty %}
-            <a href="{% url 'add_task' %}">Add Task</a>
+            <p>No Task added yet!!</p>
         {% endfor %} 
     </ul>
 </div>

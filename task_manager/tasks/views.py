@@ -22,22 +22,14 @@ def task_list(request):
 def task_detail(request,pk):
     task = get_object_or_404(Task,pk=pk,user=request.user)
     context = {
-        'task':task
+        'task':task,
     }
     return render(request,'task_detail.html',context)
-
-# @login_required
-# def toggle_task(request,pk):
-#     if request.method == 'POST':
-#         task = get_object_or_404(Task,pk=pk,user=request.user)
-#         task.completed = not(task.completed)
-#         task.save()
-#         return redirect('task_detail',pk=pk)
 
 @login_required
 def add_task(request):
     if request.method == 'POST':
-        form = TaskForm(request.POST)
+        form = TaskForm(request.POST,user=request.user)
         if form.is_valid():
             task = form.save(commit=False)
             task.user = request.user
@@ -45,7 +37,7 @@ def add_task(request):
             messages.success(request, "Task added successfully")
             return redirect('task_list')   
     else:
-        form = TaskForm()
+        form = TaskForm(user=request.user)
     context = {
         'form':form
     }
@@ -77,7 +69,7 @@ def edit_task(request,pk):
             messages.success(request, "Task Updated")
             return redirect('task_detail',pk=task.pk)
     else:
-        form = TaskEditForm(instance=task)
+        form = TaskEditForm(instance=task,user=request.user)
     context = {
         'form':form
     }

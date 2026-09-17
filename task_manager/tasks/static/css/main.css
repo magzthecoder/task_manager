@@ -1,0 +1,18 @@
+body{
+    background-color: #F8FAFC;
+    color: #1E293B;
+    font-family: "Inter",sans-serif;
+}
+main{
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 24px;
+} 
+.messages{
+    color: #D97706;
+    background: #FFF7ED;
+    padding: 20px;
+    border-radius: 24px;
+    margin: 40px;
+    margin-bottom: 24px;
+}

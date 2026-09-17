@@ -1,14 +1,16 @@
 {% extends 'main.html' %}
+{% load static %}
 
-    {% block title %}Task Manager{% endblock %}
+    {% block title %}Register{% endblock %}
 
 {% block content %}
+
+<h1>Get Started with your Task Manager</h1>
+{% block extra_head %}<link rel="stylesheet" href="{% static 'css/register.css' %}">{% endblock %}
+
     <div>
         <form method="POST">
             {% csrf_token %}
-
-            <h3>Get Started with your Task Manager</h3>
-            <hr>
 
             {% if messages %}
             <div class="alert alert-primary" role="alert">
@@ -33,7 +35,7 @@
                 <button type="submit" class="button">Submit</button>
 
                 <p>
-                    <a href="{% url 'login_page' %}" class="register-button">Already have an account?</a>
+                    <a href="{% url 'login_page' %}" class="login-button">Already have an account?</a>
                 </p>
 
 

@@ -1,15 +1,15 @@
 {% extends 'main.html' %}
+{% load static %}
 
-{% block title %}Task Manager{% endblock %}
+{% block title %}Login{% endblock %}
 
 {% block content %}
+
+<h1>Log on to your Task Manager</h1>
+{% block extra_head %}<link rel="stylesheet" href="{% static 'css/login.css' %}">{% endblock %}
 <div>
         <form method="POST">
             {% csrf_token %}
-            <h3>Log on to your Task Manager</h3>
-
-            <hr>
-           
             
             <div class="form-group">
                 <input type="text" name="username" id="username" required>
