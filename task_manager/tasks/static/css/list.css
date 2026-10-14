@@ -98,3 +98,6 @@ nav{
 .logout-link:hover, .add-link:hover{
     background-color:#00BFFF ;
 }
+.hidden{
+    display: none;
+}
