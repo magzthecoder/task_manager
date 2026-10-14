@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .forms import TaskForm, TaskEditForm, CategoryForm
 from django.contrib import messages
+from django.http import JsonResponse
 
 def index(request):
     return HttpResponse("Hello World")
@@ -30,12 +31,20 @@ def task_detail(request,pk):
 def add_task(request):
     if request.method == 'POST':
         form = TaskForm(request.POST,user=request.user)
+        response = request.get_preferred_type(["text/html", "application/json"])
         if form.is_valid():
             task = form.save(commit=False)
             task.user = request.user
-            task.save() 
+            task.save()
+            if response == "application/json":
+                return JsonResponse({"category":task.category_id,
+                                     "id":task.id,
+                                     "title":task.title, "description":task.description ,"completed":task.completed,"success":True},status=201)
             messages.success(request, "Task added successfully")
-            return redirect('task_list')   
+            return redirect('task_list')
+        else:
+            if response == "application/json":
+                return JsonResponse(data=form.errors.get_json_data(),status=400)  
     else:
         form = TaskForm(user=request.user)
     context = {
