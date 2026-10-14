@@ -14,6 +14,19 @@ def index(request):
 @login_required
 def task_list(request):
     tasks = Task.objects.filter(user=request.user)
+    response = request.get_preferred_type(["text/html", "application/json"])
+    if response == "application/json":
+        tasks_list = []
+        for task in tasks:
+            tasks_dict = {"category":task.category_id,
+                            "id":task.id,
+                            "title":task.title, 
+                            "description":task.description ,
+                            "completed":task.completed,
+                            "success":True}
+            tasks_list.append(tasks_dict)
+        return JsonResponse(data={"tasks":tasks_list},status=200)
+            
     context = {
         'tasks':tasks
     }
