@@ -24,26 +24,10 @@
 </div>
 
 <div class="task">
-    <ul class="text">
-        {% for x in tasks %} 
-            <li class="task-card">
-                <h2>{{ x.title }}</h2>
-                <p class="category">{{ x.category }}</p> 
-                <p class="status {% if x.completed %}completed{% else %}not-completed{% endif %}">
-                    {% if x.completed %}
-                        Completed
-                    {% else %}
-                        Not completed
-                    {% endif %}
-                </p> 
-                <p class="view-container">
-                    <a href="{% url 'task_detail' x.pk %}" class="view-link">View</a>
-                </p>
-            </li>
-            {% empty %}
-            <p>No Task added yet!!</p>
-        {% endfor %} 
+    <ul class="text" id="task-list">
     </ul>
 </div>
+
+<script src="{% static 'js/task_list.js' %}" defer></script>
 
 {% endblock %}
