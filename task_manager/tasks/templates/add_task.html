@@ -7,12 +7,12 @@
 <h1>Add Task</h1>
 {% block extra_head %}<link rel="stylesheet" href="{% static 'css/add.css' %}">{% endblock %}
 <div class="text">
-    <form method="POST">
+    <form method="POST" id="add-task-form">
         {% csrf_token %}
         <p>Category: {{ form.category }} <a href="{% url 'add_category'  %}">Add Category</a> <br> </p>
         <p>{{ form.title }}<br></p>
         <p>{{ form.description }}<br></p>
-
+        <p id="message" aria-live="polite"></p><br>
         <div class="btns">
             <a href="{% url 'task_list' %}" class="back-btn">Back</a>
             <button class="submit-btn" button>Submit</button>
@@ -20,6 +20,6 @@
     </form>
 </div>
 
-
+<script src="{% static 'js/add_task.js' %}"></script>
 
 {% endblock %}
