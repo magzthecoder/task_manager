@@ -1,6 +1,11 @@
 const task_list = document.querySelector("#task-list");
+const loader = document.createElement("li");
+loader.textContent = "Loading tasks....";
+loader.classList.add("hidden");
+task_list.append(loader);
 
 async function loadTasks(){
+    loader.classList.remove("hidden")
     try {
         const response = await fetch("http://127.0.0.1:8000/task/",{
         method:"GET",
@@ -60,9 +65,11 @@ async function loadTasks(){
         }
     } catch (error) {
         const error_message = document.createElement("li");
-        error_message.textContent = "Unable to load tasks.Please try again.";
+        error_message.textContent = "Unable to load tasks. Please try again.";
         task_list.append(error_message);
         console.error(error);
+    }finally{
+        loader.classList.add("hidden");
     }
     
 }
