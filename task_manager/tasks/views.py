@@ -18,7 +18,7 @@ def task_list(request):
     if response == "application/json":
         tasks_list = []
         for task in tasks:
-            tasks_dict = {"category":task.category_id,
+            tasks_dict = {"category":task.category.title,
                             "id":task.id,
                             "title":task.title, 
                             "description":task.description ,
