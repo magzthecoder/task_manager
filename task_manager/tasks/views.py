@@ -98,6 +98,24 @@ def edit_task(request,pk):
     return render(request, 'edit_task.html', context)
 
 @login_required
+def toggle_completion(request,pk):
+    task = get_object_or_404(Task,pk=pk,user=request.user)
+    if request.method == 'POST':
+        completed_value = request.POST.get("completed")
+        if completed_value == "true":
+            task.completed = True
+            task.save()
+            return JsonResponse({"id":task.id,"completed":task.completed},status=200)
+        elif completed_value == "false":
+            task.completed = False
+            task.save()
+            return JsonResponse({"id":task.id,"completed":task.completed},status=200)
+        else:
+            return JsonResponse(data={"error":"Invalid"},status=400)
+    else:
+        return JsonResponse(data={"error":"Invalid"},status=405)
+    
+@login_required
 def delete_task(request,pk):
     task = get_object_or_404(Task,pk=pk,user=request.user)
     if request.method == 'POST':
