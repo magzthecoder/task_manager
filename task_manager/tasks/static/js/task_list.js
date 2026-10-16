@@ -3,6 +3,7 @@ const loader = document.createElement("li");
 loader.textContent = "Loading tasks....";
 loader.classList.add("hidden");
 task_list.append(loader);
+const message = document.createElement("li");
 
 async function loadTasks(){
     loader.classList.remove("hidden")
@@ -16,8 +17,6 @@ async function loadTasks(){
          if(response.ok){
             const data = await response.json();
             console.log(data);
-
-            const message = document.createElement("li");
             
             if(data.tasks.length === 0){
                 message.textContent = "No tasks added yet!"
@@ -75,9 +74,10 @@ async function loadTasks(){
             throw new Error(response.status);
         }
     } catch (error) {
-        const error_message = document.createElement("li");
-        error_message.textContent = "Unable to load tasks. Please try again.";
-        task_list.append(error_message);
+        message.textContent = "Unable to load tasks. Please try again.";
+        if (!task_list.contains(message)) {
+            task_list.append(message);
+        }
         console.error(error);
     }finally{
         loader.classList.add("hidden");
@@ -106,7 +106,6 @@ const csrftoken = getCookie('csrftoken');
 task_list.addEventListener("click", async function(event){
     if(event.target.matches(".toggle-completion")){
         const task_id = event.target.dataset.taskId;
-        const message = document.createElement("li");
 
         console.log(task_id)
         let newStatus;
@@ -121,6 +120,11 @@ task_list.addEventListener("click", async function(event){
         params.append('completed', String(newStatus));
         
         console.log(newStatus);
+        const original = event.target.textContent;
+        let updateSucceeded = false;
+        event.target.disabled = true;
+        event.target.textContent = "Updating...";
+
         try {
             const response = await fetch(`http://127.0.0.1:8000/task/${task_id}/toggle/`,{
             method:"POST",
@@ -135,6 +139,8 @@ task_list.addEventListener("click", async function(event){
                 console.log(data);
                 const taskCard = event.target.closest(".task-card");
                 const completion = taskCard.querySelector(".status");
+                updateSucceeded = true;
+                message.remove();
 
                 completion.textContent = data.completed ? "Completed":"Not completed";
                 if(data.completed === true){
@@ -150,17 +156,26 @@ task_list.addEventListener("click", async function(event){
             }else if (response.status === 400){
                 message.textContent = "Form is invalid";
                 console.log(data);
-                task_list.append(message);
+                if (!task_list.contains(message)) {
+                    task_list.append(message);
+                }
             }else{
                 message.textContent = "Unexpected error!!";
                 console.error(data);
                 task_list.append(message);
             }
         } catch (error) {
-            const error_message = document.createElement("li");
-            error_message.textContent = "Invalid. Please try again.";
-            task_list.append(error_message);
+            message.textContent = "Unable to update this task. Please try again.";
+            if (!task_list.contains(message)) {
+                task_list.append(message);
+            }
             console.error(error);
+        }finally{
+            event.target.disabled = false;
+            if(updateSucceeded === false){
+                event.target.textContent = original;
+            }
+
         }
     }
 })
