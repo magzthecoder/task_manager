@@ -31,10 +31,10 @@ A task management web application built with **Django**, HTML, CSS, and vanilla 
 
 ### 1. Clone the repository
 
-Replace `<https://github.com/magzthecoder>` with the URL of your GitHub repository:
+Replace `<repository-url>` with the URL of your GitHub repository:
 
 ```bash
-git clone https://github.com/magzthecoder
+git clone <repository-url>
 cd <repository-folder>
 ```
 
@@ -139,3 +139,4 @@ The core task-management pages and the asynchronous task-list features have been
 ## Author
 
 **Carlton Magura**
+
