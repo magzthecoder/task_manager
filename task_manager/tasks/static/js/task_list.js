@@ -78,7 +78,6 @@ async function loadTasks(){
         if (!task_list.contains(message)) {
             task_list.append(message);
         }
-        console.error(error);
     }finally{
         loader.classList.add("hidden");
     }
@@ -136,7 +135,6 @@ task_list.addEventListener("click", async function(event){
             });
             const data = await response.json();
             if(response.status === 200 ){
-                console.log(data);
                 const taskCard = event.target.closest(".task-card");
                 const completion = taskCard.querySelector(".status");
                 updateSucceeded = true;
@@ -155,13 +153,11 @@ task_list.addEventListener("click", async function(event){
 
             }else if (response.status === 400){
                 message.textContent = "Form is invalid";
-                console.log(data);
                 if (!task_list.contains(message)) {
                     task_list.append(message);
                 }
             }else{
                 message.textContent = "Unexpected error!!";
-                console.error(data);
                 task_list.append(message);
             }
         } catch (error) {
@@ -169,7 +165,6 @@ task_list.addEventListener("click", async function(event){
             if (!task_list.contains(message)) {
                 task_list.append(message);
             }
-            console.error(error);
         }finally{
             event.target.disabled = false;
             if(updateSucceeded === false){
