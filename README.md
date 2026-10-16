@@ -31,10 +31,10 @@ A task management web application built with **Django**, HTML, CSS, and vanilla 
 
 ### 1. Clone the repository
 
-Replace `<repository-url>` with the URL of your GitHub repository:
+Replace `<https://github.com/magzthecoder>` with the URL of your GitHub repository:
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/magzthecoder
 cd <repository-folder>
 ```
 
