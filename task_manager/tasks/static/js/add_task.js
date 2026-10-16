@@ -17,22 +17,17 @@ add_task.addEventListener("submit", async function(event){
             "Accept":"application/json"
         }
         });
-        const data = await response.json();
         if(response.status === 201 ){
             message.textContent = "Task Saved";
-            console.log(data);
             add_task.reset();
         }else if (response.status === 400){
             message.textContent = "Form is invalid";
-            console.log(data);
         }else{
             message.textContent = "Unexpected error!!";
-            console.error(data);
         }
             
     } catch (error) {
         message.textContent = "Unable to add tasks. Please try again";
-        console.log(error);
     }finally{
         submitButton.disabled = false;
         submitButton.textContent = original;

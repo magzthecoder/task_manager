@@ -85,7 +85,7 @@ def add_category(request):
 def edit_task(request,pk):
     task = get_object_or_404(Task,pk=pk,user=request.user)
     if request.method == 'POST':
-        form = TaskEditForm(request.POST, instance=task)
+        form = TaskEditForm(request.POST, instance=task, user=request.user)
         if form.is_valid():
             form.save()
             messages.success(request, "Task Updated")
